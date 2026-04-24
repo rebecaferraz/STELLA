@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio do Cliente - STELLA</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --stella-rose: #E88BA8;
+            --stella-rose-light: #FFE5EC;
+            --stella-rose-dark: #B8664D;
+            --stella-brown: #8B6B5C;
+            --stella-cream: #FFF8F5;
+            --text-dark: #2D2D2D;
+            --text-gray: #6B6B6B;
+            --orange: #FF9800;
+            --red: #F44336;
+            --purple: #9C27B0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--stella-rose-light) 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            color: var(--stella-rose-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Flow Diagram */
+        .flow-diagram {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Challenge Section */
+        .challenge-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .challenge-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--stella-rose) 0%, var(--stella-rose-dark) 100%);
+        }
+        
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            color: var(--stella-rose-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--stella-rose-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        /* Fragmented Channels */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .channel-card {
+            background: var(--stella-cream);
+            border: 2px solid var(--stella-rose-light);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(232, 139, 168, 0.2);
+            border-color: var(--stella-rose);
+        }
+        
+        .channel-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--stella-rose-light) 0%, #FFD4E0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+        }
+        
+        .channel-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .channel-detail {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+        
+        .chaos-indicator {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 0.75rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Arrow */
+        .arrow-down {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .arrow-down svg {
+            width: 40px;
+            height: 40px;
+            color: var(--stella-rose);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        /* Impact Cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .impact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.75rem;
+            border-left: 4px solid;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .impact-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .impact-card.emotional {
+            border-left-color: var(--red);
+        }
+        
+        .impact-card.cognitive {
+            border-left-color: var(--orange);
+        }
+        
+        .impact-card.operational {
+            border-left-color: var(--purple);
+        }
+        
+        .impact-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .impact-stat {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-card.emotional .impact-stat { color: var(--red); }
+        .impact-card.cognitive .impact-stat { color: var(--orange); }
+        .impact-card.operational .impact-stat { color: var(--purple); }
+        
+        .impact-description {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Root Cause */
+        .root-cause {
+            background: linear-gradient(135deg, var(--stella-rose-dark) 0%, var(--stella-brown) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .root-cause::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .root-cause-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .root-cause h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .root-cause p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.95;
+        }
+        
+        .stat-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            margin: 0 0.25rem;
+        }
+        
+        /* Solution Preview */
+        .solution-preview {
+            background: linear-gradient(135deg, var(--stella-rose-light) 0%, #FFD4E0 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .solution-preview h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            color: var(--stella-rose-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .solution-preview p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .solution-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>O Desafio do Cliente</h1>
+            <p>
+                O tratamento de FIV exige que a paciente gerencie dezenas de variáveis 
+                simultaneamente: horários exatos, exames, restrições e comunicação urgente. 
+                Tudo isso enquanto lida com ansiedade e a sensação de estar sozinha.
+            </p>
+        </div>
+        
+        <div class="flow-diagram">
+            <!-- Fragmentação -->
+            <div class="challenge-section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                            <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                            <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    Informações Espalhadas por Vários Canais
+                </div>
+                
+                <div class="channels-grid">
+                    <div class="channel-card">
+                        <div class="chaos-indicator">!</div>
+                        <div class="channel-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <div class="channel-label">PDFs por E-mail</div>
+                        <div class="channel-detail">Protocolos estáticos</div>
+                    </div>
+                    
+                    <div class="channel-card">
+                        <div class="chaos-indicator">!</div>
+                        <div class="channel-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="channel-label">WhatsApp</div>
+                        <div class="channel-detail">Respostas lentas</div>
+                    </div>
+                    
+                    <div class="channel-card">
+                        <div class="chaos-indicator">!</div>
+                        <div class="channel-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </div>
+                        <div class="channel-label">Vídeos Externos</div>
+                        <div class="channel-detail">YouTube, links</div>
+                    </div>
+                    
+                    <div class="channel-card">
+                        <div class="chaos-indicator">!</div>
+                        <div class="channel-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="channel-label">Resultados</div>
+                        <div class="channel-detail">Canais diferentes</div>
+                    </div>
+                    
+                    <div class="channel-card">
+                        <div class="chaos-indicator">!</div>
+                        <div class="channel-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="channel-label">Grupos Online</div>
+                        <div class="channel-detail">Sem validação</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arrow -->
+            <div class="arrow-down">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                </svg>
+            </div>
+            
+            <!-- Impactos -->
+            <div class="challenge-section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    Impactos Reais na Vida das Pacientes
+                </div>
+                
+                <div class="impact-grid">
+                    <div class="impact-card emotional">
+                        <div class="impact-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            Sobrecarga Emocional
+                        </div>
+                        <div class="impact-stat">80%</div>
+                        <div class="impact-description">
+                            das pacientes relatam ansiedade constante e sensação de abandono 
+                            em momentos críticos do tratamento
+                        </div>
+                    </div>
+                    
+                    <div class="impact-card cognitive">
+                        <div class="impact-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            Sobrecarga Cognitiva
+                        </div>
+                        <div class="impact-stat">60%</div>
+                        <div class="impact-description">
+                            sentem-se perdidas tentando lembrar horários, dosagens e próximas 
+                            etapas sem um sistema centralizado
+                        </div>
+                    </div>
+                    
+                    <div class="impact-card operational">
+                        <div class="impact-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                            Risco Operacional
+                        </div>
+                        <div class="impact-stat">40%</div>
+                        <div class="impact-description">
+                            do tempo da equipe médica é gasto respondendo dúvidas repetitivas 
+                            que poderiam ser resolvidas pela plataforma
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arrow -->
+            <div class="arrow-down">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                </svg>
+            </div>
+            
+            <!-- Causa Raiz -->
+            <div class="root-cause">
+                <div class="root-cause-content">
+                    <h3>A Causa Raiz</h3>
+                    <p>
+                        Ausência de uma plataforma centralizada que integre informações, 
+                        automatize lembretes e ofereça suporte responsivo. 
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Resultado: 
+                        <span class="stat-highlight">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            0 plataformas integradas
+                        </span>
+                        <span class="stat-highlight">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                            100% gestão manual
+                        </span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Solução -->
+            <div class="solution-preview">
+                <div class="solution-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B8664D" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h3>A Solução: STELLA</h3>
+                <p>
+                    Uma plataforma web que centraliza toda a jornada de FIV em um único sistema 
+                    acessível, devolvendo à paciente a sensação de controle e segurança.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
